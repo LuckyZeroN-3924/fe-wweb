@@ -1,8 +1,8 @@
 ﻿import { useEffect, useMemo, useState } from "react";
 import { BadgePercent, ChevronLeft, ChevronRight, Headphones, Truck } from "lucide-react";
 import productDetails from "../data/productDetails.js";
-import SiteHeader from "../components/SiteHeader.jsx";
-import SiteFooter from "../components/SiteFooter.jsx";
+import Header from "../components/Header.jsx";
+import Footer from "../components/Footer.jsx";
 import { womenCollection, accessoriesMale, accessoriesFemale, menCollection, suggestionsToday, suggestionsBest } from "../data/mock.js";
 
 const QtyInput = ({ value, onChange }) => (
@@ -59,12 +59,12 @@ export default function ProductDetail({ id: passedId }) {
   if (!product) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <SiteHeader />
+        <Header />
         <div className="max-w-6xl mx-auto py-20 text-center">
           <p className="text-xl font-semibold">Không tìm thấy sản phẩm</p>
           <p className="text-sm text-gray-500">Vui lòng quay lại trang chủ để tiếp tục mua sắm.</p>
         </div>
-        <SiteFooter />
+        <Footer />
       </div>
     );
   }
@@ -78,7 +78,7 @@ export default function ProductDetail({ id: passedId }) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <SiteHeader />
+      <Header />
       <div className="py-10">
         <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
           <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] p-6">
@@ -236,9 +236,10 @@ export default function ProductDetail({ id: passedId }) {
           ) : null}
         </div>
       </div>
-      <SiteFooter />
+      <Footer />
     </div>
   );
 }
+
 
 
