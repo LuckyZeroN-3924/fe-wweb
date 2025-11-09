@@ -1,4 +1,6 @@
-﻿import { useState } from "react";\r\nimport Header from "../components/Header.jsx";\r\nimport Footer from "../components/Footer.jsx";
+﻿import { useState } from "react";
+import Header from "../components/Header.jsx";
+import Footer from "../components/Footer.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
 import ProductCard from "../components/ProductCard.jsx";
 import CategoryRound from "../components/CategoryRound.jsx";
@@ -28,7 +30,8 @@ export default function Home() {
   const [accTab, setAccTab] = useState("nam");
 
   return (
-    <div className="min-h-screen bg-white">\r\n      <Header />
+    <div className="min-h-screen bg-white">
+      <Header />
       {/* 1. HERO: Banner */}
       <section className="section-hero">
         <div className="max-w-6xl mx-auto px-4 py-10">
@@ -197,6 +200,8 @@ export default function Home() {
     </div>
   );
 }
+
+
 
 
 
