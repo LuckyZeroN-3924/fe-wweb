@@ -1,5 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { BadgePercent, ChevronLeft, ChevronRight, Headphones, Truck, RotateCcw } from "lucide-react";
+import Header from "../components/Header.jsx";
+import Footer from "../components/Footer.jsx";
 import productDetails from "../data/productDetails.js";
 
 const QtyInput = ({ value, onChange }) => (
@@ -43,14 +45,15 @@ export default function ProductDetail({ id: passedId }) {
   }
 
   const [tab, setTab] = useState("info");
-  // build related list (loại chính nó)
+  const tabLabels = { info: "Thông tin sản phẩm", policy: "Chính sách đổi trả", review: "Đánh giá sản phẩm" };
+  // build related list (loáº¡i chÃ­nh nÃ³)
   const related = useMemo(() => {
     const arr = (product?.related || []).filter((r) => String(r.id) !== String(id));
     return arr.slice(0, 3);
   }, [product, id]);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10">
+    <div className="min-h-screen bg-gray-50">`r`n      <Header />`r`n      <div className="py-10">
       <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] p-6">
           <div>
@@ -128,16 +131,16 @@ export default function ProductDetail({ id: passedId }) {
         <div className="px-6 pb-8">
           <div className="flex gap-6 justify-center border-b">
             {[
-              { id: "info", label: "Thông tin sản phẩm" },
-              { id: "policy", label: "Chính sách đổi trả" },
-              { id: "review", label: "Đánh giá sản phẩm" },
+              { id: "info", label: "ThÃ´ng tin sáº£n pháº©m" },
+              { id: "policy", label: "ChÃ­nh sÃ¡ch Ä‘á»•i tráº£" },
+              { id: "review", label: "ÄÃ¡nh giÃ¡ sáº£n pháº©m" },
             ].map((t) => (
               <button
                 key={t.id}
                 onClick={() => setTab(t.id)}
                 className={`py-2 ${tab === t.id ? "text-brand-primary border-b-2 border-brand-primary" : "text-gray-500"}`}
               >
-                {t.label}
+                {tabLabels[t.id] || t.label}
               </button>
             ))}
           </div>
@@ -171,7 +174,7 @@ export default function ProductDetail({ id: passedId }) {
                     ))}
                   </div>
                 ) : (
-                  <p>Áp dụng theo chính sách hiện hành.</p>
+                  <p>Ãp dá»¥ng theo chÃ­nh sÃ¡ch hiá»‡n hÃ nh.</p>
                 )}
               </div>
             )}
@@ -180,12 +183,12 @@ export default function ProductDetail({ id: passedId }) {
                 {Array.isArray(product.reviews) && product.reviews.length ? (
                   product.reviews.map((rv, i) => (
                     <div key={i}>
-                      <div className="font-medium">{rv.name} • {rv.rating}/5</div>
+                      <div className="font-medium">{rv.name} â€¢ {rv.rating}/5</div>
                       <p className="text-gray-600">{rv.text}</p>
                     </div>
                   ))
                 ) : (
-                  <p>Chưa có đánh giá.</p>
+                  <p>ChÆ°a cÃ³ Ä‘Ã¡nh giÃ¡.</p>
                 )}
               </div>
             )}
@@ -195,7 +198,7 @@ export default function ProductDetail({ id: passedId }) {
         {/* Related */}
         {related.length ? (
           <div className="px-6 pb-8">
-            <h2 className="text-xl font-semibold text-brand-dark text-center mb-4">Sản phẩm liên quan</h2>
+            <h2 className="text-xl font-semibold text-brand-dark text-center mb-4">Sáº£n pháº©m liÃªn quan</h2>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
               {related.map((r) => (
                 <a key={r.id} href={`#/p/${r.id}`} className="block bg-white rounded-2xl border shadow-card overflow-hidden">
@@ -209,7 +212,5 @@ export default function ProductDetail({ id: passedId }) {
             </div>
           </div>
         ) : null}
-      </div>
-    </div>
-  );
-}
+      </div>`r`n        </div>`r`n      <Footer />`r`n    </div>`r`n  );`r`n}
+

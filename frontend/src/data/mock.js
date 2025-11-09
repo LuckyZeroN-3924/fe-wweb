@@ -322,8 +322,7 @@ export const suggestionsToday = [
 
 // Gợi ý hôm nay - tab Giá tốt
 export const suggestionsBest = [
-  {
-    name: "Áo Len Nữ Cộc Tay Dáng Rộng",
+  {`n    id: "30",`n    name: "Áo dệt len tết nữ, cổ chữ V, cách điệu, vai chồm",
     price: "680.000₫",
     old: "",
     tag: 0,
@@ -337,8 +336,7 @@ export const suggestionsBest = [
     tag: 29,
     img: asset("3.webp"),
   },
-  {
-    name: "Áo polo nam ND005",
+  {`n    id: "29",`n    name: "Áo polo nam ND005",
     price: "499.000₫",
     old: "699.000₫",
     tag: 29,
@@ -367,15 +365,13 @@ export const suggestionsBest = [
     tag: 25,
     img: asset("30.webp"),
   },
-  {
-    name: "Váy ren nữ cotton dáng babydoll",
+  {`n    id: "31",`n    name: "Váy ren nữ cotton dáng babydoll",
     price: "480.000₫",
     old: "",
     tag: 0,
     img: asset("31.webp"),
   },
-  {
-    name: "Áo Nỉ Nữ Oversize Cắt Bổ Tinh Tế",
+  {`n    id: "32",`n    name: "Áo nữ oversize cắt bổ tinh tế",
     price: "486.000₫",
     old: "868.000₫",
     tag: 44,
@@ -470,3 +466,4 @@ export const accessoriesFemale = [
     img: asset("15.webp"),
   },
 ];
+
