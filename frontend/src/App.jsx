@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 
 import Layout from "./Layout";
 import MenList from "./pages/MenList";
+import Home from "./pages/Home";
 import CategoryPage from "./pages/CategoryPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import ContactPage from "./pages/ContactPage";
@@ -30,7 +31,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
-            <Route path="/" element={<MenList />} />
+            <Route path="/" element={<Home />} />
             <Route path="/category" element={<CategoryPage />} />
             <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="/contact" element={<ContactPage />} />
