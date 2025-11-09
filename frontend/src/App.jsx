@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import Layout from "./Layout";
 import MenList from "./pages/MenList";
 import Home from "./pages/Home";
+import ProductDetail from "./pages/ProductDetail.jsx";
 import CategoryPage from "./pages/CategoryPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import ContactPage from "./pages/ContactPage";
@@ -39,6 +40,7 @@ export default function App() {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/orders" element={<OrderPage />} />
+            <Route path="/p/:id" element={<ProductDetail />} />
             <Route path="/account" element={<AccountLayout />}>
               <Route path="profile" element={<AccountProfile />} />
               <Route path="bank" element={<AccountBank />} />

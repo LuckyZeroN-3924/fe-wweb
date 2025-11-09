@@ -2,6 +2,7 @@
 import { BadgePercent, ChevronLeft, ChevronRight, Headphones, Truck } from "lucide-react";
 import productDetails from "../data/productDetails.js";
 import Header from "../components/Header.jsx";
+import { useParams } from "react-router";
 import Footer from "../components/Footer.jsx";
 import { womenCollection, accessoriesMale, accessoriesFemale, menCollection, suggestionsToday, suggestionsBest } from "../data/mock.js";
 
@@ -29,7 +30,7 @@ export default function ProductDetail({ id: passedId }) {
     return () => window.removeEventListener("hashchange", fn);
   }, []);
 
-  const id = passedId || hashId || "1";
+  const id = passedId || routeId || hashId || "1";
   const product = productDetails[id]; console.debug("PD id=", id, product);
 
   const nameDict = Object.fromEntries([
@@ -230,6 +231,7 @@ export default function ProductDetail({ id: passedId }) {
     </div>
   );
 }
+
 
 
 
