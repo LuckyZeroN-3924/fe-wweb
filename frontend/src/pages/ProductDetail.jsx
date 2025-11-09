@@ -1,8 +1,7 @@
 ﻿import { useEffect, useMemo, useState } from "react";
 import { BadgePercent, ChevronLeft, ChevronRight, Headphones, Truck, RotateCcw } from "lucide-react";
-import Header from "../components/Header.jsx";
-import Footer from "../components/Footer.jsx";
 import productDetails from "../data/productDetails.js";
+import { womenCollection, accessoriesMale, accessoriesFemale, menCollection, suggestionsToday, suggestionsBest } from "../data/mock.js";
 
 const QtyInput = ({ value, onChange }) => (
   <div className="inline-flex items-center gap-3 rounded-xl border px-3 py-2">
@@ -28,6 +27,25 @@ export default function ProductDetail({ id: passedId }) {
   }, []);
   const id = passedId || hashId || "1";
   const product = productDetails[id];
+  const nameDict = Object.fromEntries([
+    ...(womenCollection||[]).map(x=>[String(x.id),x]),
+    ...(accessoriesMale||[]).map(x=>[String(x.id),x]),
+    ...(accessoriesFemale||[]).map(x=>[String(x.id),x]),
+    ...(menCollection||[]).map(x=>[String(x.id),x]),
+    ...(suggestionsToday||[]).map(x=>[String(x.id),x]),
+    ...(suggestionsBest||[]).map(x=>[String(x.id),x]),
+  ]);
+  const enrichRelated = (r)=>{
+    const k = String(r.id);
+    const src = nameDict[k]||{};
+    const bad = typeof r.name === "string" && /^Sản phẩm\s+\d+$/i.test(r.name);
+    return {
+      id: k,
+      name: (bad || !r.name) ? (src.name || r.name) : r.name,
+      price: src.price || r.price,
+      img: src.img || r.img || (k? new URL(`../anhNNKB/${k}.webp`, import.meta.url).href : undefined),
+    };
+  };
   const gallery = useMemo(() => {
     if (!product) return [];
     return [product.hero, ...(product.images || [])].filter(Boolean);
@@ -49,11 +67,11 @@ export default function ProductDetail({ id: passedId }) {
   // build related list (loáº¡i chÃ­nh nÃ³)
   const related = useMemo(() => {
     const arr = (product?.related || []).filter((r) => String(r.id) !== String(id));
-    return arr.slice(0, 3);
+    return arr.slice(0, 3).map(enrichRelated);
   }, [product, id]);
 
   return (
-    <div className="min-h-screen bg-gray-50">`r`n      <Header />`r`n      <div className="py-10">
+    <div className="min-h-screen bg-gray-50 py-10"><div className="py-10">
       <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] p-6">
           <div>
@@ -212,6 +230,12 @@ export default function ProductDetail({ id: passedId }) {
             </div>
           </div>
         ) : null}
-      </div>`r`n        </div>`r`n      <Footer />`r`n    </div>`r`n  );`r`n}
+      </div>
+        </div></div>
+  );
+}
+
+
+
 
 
