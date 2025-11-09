@@ -1,16 +1,36 @@
 ﻿import { useEffect, useMemo, useState } from "react";
-import { BadgePercent, ChevronLeft, ChevronRight, Headphones, Truck } from "lucide-react";
+import {
+  BadgePercent,
+  ChevronLeft,
+  ChevronRight,
+  Headphones,
+  Truck,
+} from "lucide-react";
 import productDetails from "../data/productDetails.js";
 import Header from "../components/Header.jsx";
 import { useParams } from "react-router";
 import Footer from "../components/Footer.jsx";
-import { womenCollection, accessoriesMale, accessoriesFemale, menCollection, suggestionsToday, suggestionsBest } from "../data/mock.js";
+import {
+  womenCollection,
+  accessoriesMale,
+  accessoriesFemale,
+  menCollection,
+  suggestionsToday,
+  suggestionsBest,
+} from "../data/mock.js";
 
 const QtyInput = ({ value, onChange }) => (
   <div className="inline-flex items-center gap-3 rounded-xl border px-3 py-2">
-    <button onClick={() => onChange(Math.max(1, value - 1))} className="text-sm">-</button>
+    <button
+      onClick={() => onChange(Math.max(1, value - 1))}
+      className="text-sm"
+    >
+      -
+    </button>
     <span className="min-w-6 text-center text-sm">{value}</span>
-    <button onClick={() => onChange(value + 1)} className="text-sm">+</button>
+    <button onClick={() => onChange(value + 1)} className="text-sm">
+      +
+    </button>
   </div>
 );
 
@@ -23,7 +43,7 @@ function ShippingIcon({ index }) {
 /* debug */ console.debug("ProductDetail mount");
 export default function ProductDetail({ id: passedId }) {
   const [qty, setQty] = useState(1);
-  const [hashId, setHashId] = useState(() => (location.hash.split("/")[2] || ""));
+  const [hashId, setHashId] = useState(() => location.hash.split("/")[2] || "");
   useEffect(() => {
     const fn = () => setHashId(location.hash.split("/")[2] || "");
     window.addEventListener("hashchange", fn);
@@ -31,7 +51,8 @@ export default function ProductDetail({ id: passedId }) {
   }, []);
 
   const id = passedId || routeId || hashId || "1";
-  const product = productDetails[id]; console.debug("PD id=", id, product);
+  const product = productDetails[id];
+  console.debug("PD id=", id, product);
 
   const nameDict = Object.fromEntries([
     ...(womenCollection || []).map((x) => [String(x.id), x]),
@@ -47,9 +68,14 @@ export default function ProductDetail({ id: passedId }) {
     const bad = typeof r.name === "string" && /^Sản phẩm\s+\d+$/i.test(r.name);
     return {
       id: k,
-      name: (bad || !r.name) ? (src.name || r.name) : r.name,
+      name: bad || !r.name ? src.name || r.name : r.name,
       price: src.price || r.price,
-      img: src.img || r.img || (k ? new URL("../anhNNKB/" + k + ".webp", import.meta.url).href : undefined),
+      img:
+        src.img ||
+        r.img ||
+        (k
+          ? new URL("../anhNNKB/" + k + ".webp", import.meta.url).href
+          : undefined),
     };
   };
 
@@ -58,12 +84,31 @@ export default function ProductDetail({ id: passedId }) {
     return [product.hero, ...(product.images || [])].filter(Boolean);
   }, [product]);
 
-  if (!product) { return (<div className="min-h-screen bg-gray-50"><Header /><div className="max-w-6xl mx-auto py-20 text-center"><p className="text-xl font-semibold">Không tìm thấy dữ liệu cho sản phẩm: {id}</p><p className="text-sm text-gray-500">Vui lòng quay lại trang chủ.</p></div><Footer /></div>); }
+  if (!product) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <div className="max-w-6xl mx-auto py-20 text-center">
+          <p className="text-xl font-semibold">
+            Không tìm thấy dữ liệu cho sản phẩm: {id}
+          </p>
+          <p className="text-sm text-gray-500">Vui lòng quay lại trang chủ.</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   const [tab, setTab] = useState("info");
-  const tabLabels = { info: "Thông tin sản phẩm", policy: "Chính sách đổi trả", review: "Đánh giá sản phẩm" };
+  const tabLabels = {
+    info: "Thông tin sản phẩm",
+    policy: "Chính sách đổi trả",
+    review: "Đánh giá sản phẩm",
+  };
   const related = useMemo(() => {
-    const arr = (product?.related || []).filter((r) => String(r.id) !== String(id));
+    const arr = (product?.related || []).filter(
+      (r) => String(r.id) !== String(id)
+    );
     return arr.slice(0, 3).map(enrichRelated);
   }, [product, id]);
 
@@ -80,21 +125,35 @@ export default function ProductDetail({ id: passedId }) {
                     <button
                       key={idx}
                       className="h-16 w-full overflow-hidden rounded-xl bg-gray-100"
-                      style={{ border: idx === 0 ? "2px solid #ff7a45" : undefined }}
+                      style={{
+                        border: idx === 0 ? "2px solid #ff7a45" : undefined,
+                      }}
                       onClick={(evt) => {
-                        const main = evt.currentTarget.parentElement.nextElementSibling.querySelector('img');
+                        const main =
+                          evt.currentTarget.parentElement.nextElementSibling.querySelector(
+                            "img"
+                          );
                         if (main) main.src = img;
                       }}
                     >
-                      <img src={img} alt={product.name} className="h-full w-full object-cover" />
+                      <img
+                        src={img}
+                        alt={product.name}
+                        className="h-full w-full object-cover"
+                      />
                     </button>
                   ))}
                 </div>
                 <div className="rounded-2xl bg-gray-100 p-3 text-center relative">
-                  <img src={gallery[0]} alt={product.name} className="h-96 w-full object-contain" />
+                  <img
+                    src={gallery[0]}
+                    alt={product.name}
+                    className="h-96 w-full object-contain"
+                  />
                   <button
                     onClick={(e) => {
-                      const el = e.currentTarget.parentElement.querySelector('img');
+                      const el =
+                        e.currentTarget.parentElement.querySelector("img");
                       const idx = Math.max(0, gallery.indexOf(el?.src));
                       const next = (idx - 1 + gallery.length) % gallery.length;
                       if (el) el.src = gallery[next];
@@ -105,7 +164,8 @@ export default function ProductDetail({ id: passedId }) {
                   </button>
                   <button
                     onClick={(e) => {
-                      const el = e.currentTarget.parentElement.querySelector('img');
+                      const el =
+                        e.currentTarget.parentElement.querySelector("img");
                       const idx = Math.max(0, gallery.indexOf(el?.src));
                       const next = (idx + 1) % gallery.length;
                       if (el) el.src = gallery[next];
@@ -119,23 +179,37 @@ export default function ProductDetail({ id: passedId }) {
             </div>
             <div className="space-y-4">
               <div>
-                <p className="text-sm uppercase tracking-[0.3em] text-gray-500">{product.variant}</p>
-                <h1 className="text-3xl font-semibold text-brand-dark">{product.name}</h1>
-                <p className="text-2xl font-bold text-brand-primary">{product.price}</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-gray-500">
+                  {product.variant}
+                </p>
+                <h1 className="text-3xl font-semibold text-brand-dark">
+                  {product.name}
+                </h1>
+                <p className="text-2xl font-bold text-brand-primary">
+                  {product.price}
+                </p>
               </div>
-              <p className="text-sm text-gray-600 leading-relaxed">{product.desc}</p>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                {product.desc}
+              </p>
               <div className="flex items-center gap-3">
                 <QtyInput value={qty} onChange={setQty} />
-                <button className="rounded-full bg-brand-primary px-5 py-2 text-white">Thêm vào giỏ</button>
+                <button className="rounded-full bg-brand-primary px-5 py-2 text-white">
+                  Thêm vào giỏ
+                </button>
               </div>
               <div className="space-y-3 rounded-2xl border bg-[#fffaf6] p-4">
-                <p className="text-sm font-semibold text-brand-dark">Ưu đãi & vận chuyển</p>
+                <p className="text-sm font-semibold text-brand-dark">
+                  Ưu đãi & vận chuyển
+                </p>
                 <div className="space-y-2 text-sm text-gray-600">
                   {(product.shipping || []).map((item, idx) => (
                     <div key={idx} className="flex items-center gap-2">
                       <ShippingIcon index={idx} />
                       <div>
-                        <p className="font-medium text-brand-dark">{item.title}</p>
+                        <p className="font-medium text-brand-dark">
+                          {item.title}
+                        </p>
                         <p>{item.sub}</p>
                       </div>
                     </div>
@@ -151,7 +225,7 @@ export default function ProductDetail({ id: passedId }) {
                 <button
                   key={t.id}
                   onClick={() => setTab(t.id)}
-                  className={py-2 }
+                  className={`py-2 ${tab === t.id ? "text-brand-primary border-b-2 border-brand-primary" : "text-gray-500"}` }
                 >
                   {tabLabels[t.id]}
                 </button>
@@ -177,10 +251,14 @@ export default function ProductDetail({ id: passedId }) {
                     <div className="space-y-3">
                       {product.policy.map((sec, i) => (
                         <div key={i}>
-                          {sec.title ? <div className="font-medium mb-1">{sec.title}</div> : null}
+                          {sec.title ? (
+                            <div className="font-medium mb-1">{sec.title}</div>
+                          ) : null}
                           {sec.lines ? (
                             <ul className="list-disc pl-6 space-y-1">
-                              {sec.lines.map((l, j) => <li key={j}>{l}</li>)}
+                              {sec.lines.map((l, j) => (
+                                <li key={j}>{l}</li>
+                              ))}
                             </ul>
                           ) : null}
                         </div>
@@ -196,7 +274,9 @@ export default function ProductDetail({ id: passedId }) {
                   {Array.isArray(product.reviews) && product.reviews.length ? (
                     product.reviews.map((rv, i) => (
                       <div key={i}>
-                        <div className="font-medium">{rv.name} • {rv.rating}/5</div>
+                        <div className="font-medium">
+                          {rv.name} • {rv.rating}/5
+                        </div>
                         <p className="text-gray-600">{rv.text}</p>
                       </div>
                     ))
@@ -211,14 +291,24 @@ export default function ProductDetail({ id: passedId }) {
           {/* Related */}
           {related.length ? (
             <div className="px-6 pb-8">
-              <h2 className="text-xl font-semibold text-brand-dark text-center mb-4">Sản phẩm liên quan</h2>
+              <h2 className="text-xl font-semibold text-brand-dark text-center mb-4">
+                Sản phẩm liên quan
+              </h2>
               <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
                 {related.map((r) => (
-                  <a key={r.id} href={"#/p/" + r.id} className="block bg-white rounded-2xl border shadow-card overflow-hidden">
+                  <a
+                    key={r.id}
+                    href={"#/p/" + r.id}
+                    className="block bg-white rounded-2xl border shadow-card overflow-hidden"
+                  >
                     <img src={r.img} className="w-full h-56 object-cover" />
                     <div className="p-3">
-                      <div className="text-sm text-gray-700 line-clamp-2">{r.name}</div>
-                      <div className="mt-1 text-brand-primary font-semibold">{r.price}</div>
+                      <div className="text-sm text-gray-700 line-clamp-2">
+                        {r.name}
+                      </div>
+                      <div className="mt-1 text-brand-primary font-semibold">
+                        {r.price}
+                      </div>
                     </div>
                   </a>
                 ))}
@@ -231,13 +321,4 @@ export default function ProductDetail({ id: passedId }) {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
 
