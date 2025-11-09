@@ -4,7 +4,9 @@
       <div className="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-4 gap-8 text-sm">
         <div>
           <div className="text-lg font-bold text-brand-dark">ND Style</div>
-          <p className="text-gray-600 mt-3">Công ty ND Theme – Hệ thống cửa hàng thời trang.</p>
+          <p className="text-gray-600 mt-3">
+            Công ty ND Theme – Hệ thống cửa hàng thời trang.
+          </p>
         </div>
         <div>
           <div className="font-semibold mb-3">Về chúng tôi</div>
@@ -33,7 +35,9 @@
           </div>
         </div>
       </div>
-      <div className="text-center text-xs text-gray-500 py-4 border-t">© ND Theme – Cung cấp bởi Sapo</div>
+      <div className="text-center text-xs text-gray-500 py-4 border-t">
+        © ND Theme – Cung cấp bởi Sapo
+      </div>
     </footer>
   );
 }
