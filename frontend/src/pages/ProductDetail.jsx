@@ -112,7 +112,7 @@ export default function ProductDetail({ id: passedId }) {
               <button className="rounded-full bg-brand-primary px-5 py-2 text-white">Add to cart</button>
             </div>
             <div className="space-y-3 rounded-2xl border bg-[#fffaf6] p-4">
-              <p className="text-sm font-semibold text-brand-dark">Shipping & perks</p>
+              <p className="text-sm font-semibold text-brand-dark">Ưu đãi & vận chuyển</p>
               <div className="space-y-2 text-sm text-gray-600">
                 {(product.shipping || []).map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
@@ -213,4 +213,5 @@ export default function ProductDetail({ id: passedId }) {
           </div>
         ) : null}
       </div>`r`n        </div>`r`n      <Footer />`r`n    </div>`r`n  );`r`n}
+
 
