@@ -19,6 +19,7 @@ function ShippingIcon({ index }) {
   return <Icon className="w-4 h-4 text-brand-primary" />;
 }
 
+/* debug */ console.debug("ProductDetail mount");
 export default function ProductDetail({ id: passedId }) {
   const [qty, setQty] = useState(1);
   const [hashId, setHashId] = useState(() => (location.hash.split("/")[2] || ""));
@@ -29,7 +30,7 @@ export default function ProductDetail({ id: passedId }) {
   }, []);
 
   const id = passedId || hashId || "1";
-  const product = productDetails[id];
+  const product = productDetails[id]; console.debug("PD id=", id, product);
 
   const nameDict = Object.fromEntries([
     ...(womenCollection || []).map((x) => [String(x.id), x]),
@@ -56,18 +57,7 @@ export default function ProductDetail({ id: passedId }) {
     return [product.hero, ...(product.images || [])].filter(Boolean);
   }, [product]);
 
-  if (!product) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Header />
-        <div className="max-w-6xl mx-auto py-20 text-center">
-          <p className="text-xl font-semibold">Không tìm thấy sản phẩm</p>
-          <p className="text-sm text-gray-500">Vui lòng quay lại trang chủ để tiếp tục mua sắm.</p>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
+  if (!product) { return (<div className="min-h-screen bg-gray-50"><Header /><div className="max-w-6xl mx-auto py-20 text-center"><p className="text-xl font-semibold">Không tìm thấy dữ liệu cho sản phẩm: {id}</p><p className="text-sm text-gray-500">Vui lòng quay lại trang chủ.</p></div><Footer /></div>); }
 
   const [tab, setTab] = useState("info");
   const tabLabels = { info: "Thông tin sản phẩm", policy: "Chính sách đổi trả", review: "Đánh giá sản phẩm" };
@@ -240,6 +230,8 @@ export default function ProductDetail({ id: passedId }) {
     </div>
   );
 }
+
+
 
 
 
